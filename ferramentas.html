@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ferramentas</title>
+<style>
+body{
+background:#0F0F0F;
+color:white;
+font-family:Arial;
+padding:40px;
+}
+</style>
+</head>
+<body>
+
+<h1>Calculadora de Metas</h1>
+
+<input id="meta" placeholder="Meta mensal">
+
+<input id="valor" placeholder="Valor por cliente">
+
+<button onclick="calcular()">
+Calcular
+</button>
+
+<h2 id="resultado"></h2>
+
+<script>
+
+function calcular(){
+
+let meta =
+Number(document.getElementById("meta").value);
+
+let valor =
+Number(document.getElementById("valor").value);
+
+let clientes =
+meta / valor;
+
+document.getElementById("resultado")
+.innerHTML =
+"Você precisa de " +
+clientes +
+" clientes";
+
+}
+
+</script>
+
+</body>
+</html>
