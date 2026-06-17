@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz - Nexus One</title>
+<style>
+body{
+background:#0F0F0F;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:50px;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Quiz Nexus One</h1>
+
+<h2>Você gosta de vender?</h2>
+
+<button onclick="resultado('Afiliado')">Sim</button>
+<button onclick="resultado('Freelancer')">Não</button>
+
+<h3 id="resposta"></h3>
+
+<script>
+function resultado(tipo){
+document.getElementById("resposta").innerHTML=
+"Seu perfil combina com: " + tipo;
+}
+</script>
+
+</body>
+</html>
