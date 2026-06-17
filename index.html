@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus One</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0F0F0F;
+    color:white;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 8%;
+    background:#161616;
+    border-bottom:1px solid rgba(255,215,0,0.15);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    color:#FFD700;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#FFD700;
+}
+
+.hero{
+    min-height:85vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:4rem;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    font-size:1.1rem;
+    color:#ccc;
+    margin-bottom:35px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.primary{
+    background:#FFD700;
+    color:black;
+}
+
+.secondary{
+    border:1px solid #FFD700;
+    color:#FFD700;
+}
+
+.section{
+    padding:80px 8%;
+}
+
+.section h2{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#161616;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid rgba(255,215,0,0.1);
+}
+
+.card h3{
+    color:#FFD700;
+    margin-bottom:10px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Nexus One</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Cursos</a>
+        <a href="#">Ferramentas</a>
+        <a href="#">Biblioteca</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <h1>Nexus One</h1>
+
+    <p>
+        Educação digital focada em resultados.
+    </p>
+
+    <div class="buttons">
+        <a href="#" class="btn primary">Começar Agora</a>
+        <a href="#" class="btn secondary">Fazer Quiz</a>
+    </div>
+
+</section>
+
+<section class="section">
+
+    <h2>O que você encontra</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Cursos</h3>
+            <p>Marketing digital, vendas e crescimento online.</p>
+        </div>
+
+        <div class="card">
+            <h3>Ferramentas</h3>
+            <p>Calculadoras, prompts e recursos práticos.</p>
+        </div>
+
+        <div class="card">
+            <h3>Biblioteca</h3>
+            <p>Checklists, planilhas e materiais de apoio.</p>
+        </div>
+
+        <div class="card">
+            <h3>Quiz</h3>
+            <p>Descubra o melhor caminho digital para você.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Nexus One - Todos os direitos reservados
+</footer>
+
+</body>
+</html>
