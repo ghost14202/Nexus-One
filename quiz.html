@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Nexus One</title>
+<title>Nexus One - Quiz Profissional</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -28,43 +29,49 @@ padding:20px;
 
 .quiz-container{
 width:100%;
-max-width:800px;
+max-width:900px;
 background:#161616;
 padding:40px;
-border-radius:20px;
-box-shadow:0 0 30px rgba(255,215,0,0.15);
+border-radius:25px;
+box-shadow:0 0 40px rgba(255,215,0,.15);
 }
 
 .logo{
 text-align:center;
-font-size:32px;
+font-size:38px;
 font-weight:700;
 color:#FFD700;
 margin-bottom:20px;
 }
 
+.subtitle{
+text-align:center;
+color:#999;
+margin-bottom:30px;
+}
+
 .progress-container{
-background:#222;
 height:12px;
-border-radius:10px;
+background:#222;
+border-radius:50px;
 overflow:hidden;
 margin-bottom:30px;
 }
 
 .progress{
 height:100%;
-width:10%;
+width:0%;
 background:#FFD700;
 transition:.4s;
 }
 
 .question-number{
-color:#999;
+color:#888;
 margin-bottom:10px;
 }
 
 .question{
-font-size:26px;
+font-size:28px;
 font-weight:600;
 margin-bottom:25px;
 }
@@ -77,16 +84,16 @@ gap:15px;
 
 .option{
 background:#222;
-padding:15px;
-border-radius:12px;
+padding:18px;
+border-radius:14px;
 cursor:pointer;
 transition:.3s;
-border:1px solid transparent;
 }
 
 .option:hover{
-border-color:#FFD700;
-transform:translateY(-2px);
+background:#2A2A2A;
+border-left:5px solid #FFD700;
+transform:translateX(5px);
 }
 
 .result{
@@ -95,14 +102,29 @@ display:none;
 
 .result h2{
 color:#FFD700;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
-.result-box{
+.result-card{
 background:#222;
-padding:20px;
+padding:25px;
 border-radius:15px;
-margin-top:15px;
+margin-top:20px;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+background:#FFD700;
+color:black;
+padding:14px 25px;
+border-radius:12px;
+font-weight:600;
+text-decoration:none;
+}
+
+.btn:hover{
+opacity:.9;
 }
 
 </style>
@@ -113,15 +135,17 @@ margin-top:15px;
 
 <div class="logo">Nexus One</div>
 
+<div class="subtitle">
+Descubra qual caminho digital combina com você.
+</div>
+
 <div class="progress-container">
 <div class="progress" id="progress"></div>
 </div>
 
 <div id="quiz">
 
-<div class="question-number" id="questionNumber">
-Pergunta 1 de 10
-</div>
+<div class="question-number" id="questionNumber"></div>
 
 <div class="question" id="question"></div>
 
@@ -133,9 +157,18 @@ Pergunta 1 de 10
 
 <h2>Perfil Identificado</h2>
 
-<div class="result-box">
+<div class="result-card">
+
 <h3 id="perfil"></h3>
-<p id="descricao"></p>
+
+<br>
+
+<div id="descricao"></div>
+
+<a id="cursoBtn" class="btn">
+🚀 Acessar Minha Trilha
+</a>
+
 </div>
 
 </div>
@@ -152,37 +185,37 @@ o:["Menos de 18","18-24","25-34","35+"]
 },
 
 {
-q:"Quantas horas livres você tem por dia?",
+q:"Quantas horas livres você possui diariamente?",
 o:["Menos de 1h","1-2h","2-4h","4h+"]
 },
 
 {
-q:"Qual sua situação atual?",
+q:"Sua situação atual?",
 o:["Estudante","CLT","Desempregado","Empreendedor"]
 },
 
 {
-q:"Quanto você pode investir?",
-o:["R$0","Até R$100","R$100-R$500","R$500+"]
+q:"Quanto pode investir?",
+o:["R$0","Até R$100","Até R$500","Mais de R$500"]
 },
 
 {
-q:"Qual seu principal objetivo?",
+q:"Qual seu objetivo principal?",
 o:["Renda extra","Substituir emprego","Escalar negócio","Criar marca pessoal"]
 },
 
 {
 q:"Você gosta de vender?",
-o:["Muito","Um pouco","Não"]
+o:["Sim","Um pouco","Não"]
 },
 
 {
-q:"Você gosta de aparecer em vídeos?",
+q:"Você gosta de criar conteúdo?",
 o:["Sim","Talvez","Não"]
 },
 
 {
-q:"Qual sua habilidade mais forte?",
+q:"Qual habilidade mais forte?",
 o:["Comunicação","Criatividade","Organização","Tecnologia"]
 },
 
@@ -192,8 +225,8 @@ o:["30 dias","3 meses","6 meses","1 ano+"]
 },
 
 {
-q:"O que mais te impede hoje?",
-o:["Falta de dinheiro","Falta de conhecimento","Falta de disciplina","Falta de direção"]
+q:"O que mais te trava hoje?",
+o:["Dinheiro","Conhecimento","Disciplina","Direção"]
 }
 
 ];
@@ -208,27 +241,29 @@ const questionNumber = document.getElementById("questionNumber");
 
 function carregarPergunta(){
 
-question.innerText = perguntas[atual].q;
+const p = perguntas[atual];
+
+question.innerText = p.q;
 
 questionNumber.innerText =
 `Pergunta ${atual+1} de ${perguntas.length}`;
 
 progress.style.width =
-((atual+1)/perguntas.length)*100 + "%";
+((atual)/perguntas.length)*100 + "%";
 
 options.innerHTML="";
 
-perguntas[atual].o.forEach(opcao=>{
+p.o.forEach(opcao=>{
 
-const btn = document.createElement("div");
+const div = document.createElement("div");
 
-btn.classList.add("option");
+div.classList.add("option");
 
-btn.innerText = opcao;
+div.innerText = opcao;
 
-btn.onclick = ()=>responder(opcao);
+div.onclick = () => responder(opcao);
 
-options.appendChild(btn);
+options.appendChild(div);
 
 });
 
@@ -246,26 +281,31 @@ carregarPergunta();
 
 }else{
 
+mostrarResultado();
+
+}
+
+}
+
 function mostrarResultado(){
 
 document.getElementById("quiz").style.display="none";
+
 document.getElementById("result").style.display="block";
 
+progress.style.width="100%";
+
 let perfil = "Freelancer Digital";
-let linkCurso = "freelancer.html";
+let curso = "freelancer.html";
 
 let descricao = `
-Compatibilidade: 91%<br><br>
+<b>Compatibilidade:</b> 91%<br><br>
 
-✓ Baixo investimento inicial<br>
-✓ Possibilidade de primeiros ganhos rápidos<br>
-✓ Alta demanda no mercado<br><br>
+✅ Baixo investimento inicial<br>
+✅ Primeiros resultados rápidos<br>
+✅ Alta demanda de mercado<br><br>
 
-Desafios:<br>
-⚠ Aprender prospecção<br>
-⚠ Desenvolver disciplina diária<br><br>
-
-Trilha recomendada:<br>
+<b>Trilha Recomendada:</b><br>
 1. Marketing Digital<br>
 2. Captação de Clientes<br>
 3. Vendas<br>
@@ -276,20 +316,17 @@ Trilha recomendada:<br>
 if(respostas.includes("Criar marca pessoal")){
 
 perfil = "Criador de Conteúdo";
-linkCurso = "conteudo.html";
+
+curso = "conteudo.html";
 
 descricao = `
-Compatibilidade: 89%<br><br>
+<b>Compatibilidade:</b> 89%<br><br>
 
-✓ Potencial de longo prazo<br>
-✓ Construção de audiência<br>
-✓ Monetização escalável<br><br>
+✅ Construção de audiência<br>
+✅ Crescimento de longo prazo<br>
+✅ Monetização escalável<br><br>
 
-Desafios:<br>
-⚠ Consistência<br>
-⚠ Crescimento gradual<br><br>
-
-Trilha recomendada:<br>
+<b>Trilha Recomendada:</b><br>
 1. Marketing Digital<br>
 2. Conteúdo<br>
 3. Crescimento<br>
@@ -301,76 +338,9 @@ Trilha recomendada:<br>
 
 document.getElementById("perfil").innerHTML = perfil;
 
-document.getElementById("descricao").innerHTML =
-descricao +
-`
-<br><br>
-
-<a href="${linkCurso}"
-style="
-background:#FFD700;
-color:black;
-padding:14px 25px;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
-display:inline-block;
-">
-🚀 Acessar Minha Trilha
-</a>
-`;
-
-}
-
-}
-
-}
-
-function mostrarResultado(){
-
-document.getElementById("quiz").style.display="none";
-
-document.getElementById("result").style.display="block";
-
-let perfil = "Freelancer Digital";
-
-let descricao = `
-Compatibilidade: 91%<br><br>
-
-✓ Baixo investimento inicial<br>
-✓ Possibilidade de primeiros ganhos rápidos<br>
-✓ Alta demanda no mercado<br><br>
-
-Desafios:<br>
-⚠ Aprender prospecção<br>
-⚠ Desenvolver disciplina diária<br><br>
-
-Plano recomendado:<br>
-1. Escolher um serviço<br>
-2. Criar portfólio simples<br>
-3. Fazer contatos diariamente
-`;
-
-if(respostas.includes("Criar marca pessoal")){
-
-perfil = "Criador de Conteúdo";
-
-descricao = `
-Compatibilidade: 89%<br><br>
-
-✓ Potencial de longo prazo<br>
-✓ Construção de audiência<br>
-✓ Monetização escalável<br><br>
-
-Desafios:<br>
-⚠ Consistência<br>
-⚠ Crescimento gradual
-`;
-
-}
-
-document.getElementById("perfil").innerHTML = perfil;
 document.getElementById("descricao").innerHTML = descricao;
+
+document.getElementById("cursoBtn").href = curso;
 
 }
 
@@ -380,3 +350,4 @@ carregarPergunta();
 
 </body>
 </html>
+```
