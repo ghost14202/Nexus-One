@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quiz - Nexus One</title>
+<title>Quiz Nexus One</title>
 <style>
 body{
 background:#0F0F0F;
 color:white;
 font-family:Arial;
-text-align:center;
-padding:50px;
+padding:40px;
 }
-
 button{
 padding:10px 20px;
 margin:10px;
 cursor:pointer;
+}
+#resultado{
+margin-top:30px;
+font-size:24px;
+color:#FFD700;
 }
 </style>
 </head>
@@ -22,17 +25,43 @@ cursor:pointer;
 
 <h1>Quiz Nexus One</h1>
 
-<h2>Você gosta de vender?</h2>
+<h2>Qual caminho digital combina com você?</h2>
 
-<button onclick="resultado('Afiliado')">Sim</button>
-<button onclick="resultado('Freelancer')">Não</button>
+<select id="objetivo">
+<option>Dinheiro rápido</option>
+<option>Construir negócio</option>
+<option>Criar audiência</option>
+</select>
 
-<h3 id="resposta"></h3>
+<br><br>
+
+<button onclick="analisar()">
+Ver Resultado
+</button>
+
+<div id="resultado"></div>
 
 <script>
-function resultado(tipo){
-document.getElementById("resposta").innerHTML=
-"Seu perfil combina com: " + tipo;
+function analisar(){
+
+let objetivo =
+document.getElementById("objetivo").value;
+
+let resultado = "";
+
+if(objetivo == "Dinheiro rápido"){
+resultado = "Freelancer";
+}
+else if(objetivo == "Construir negócio"){
+resultado = "Gestor de Tráfego";
+}
+else{
+resultado = "Criador de Conteúdo";
+}
+
+document.getElementById("resultado").innerHTML =
+"Seu perfil ideal: " + resultado;
+
 }
 </script>
 
