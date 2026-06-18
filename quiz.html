@@ -246,7 +246,81 @@ carregarPergunta();
 
 }else{
 
-mostrarResultado();
+function mostrarResultado(){
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("result").style.display="block";
+
+let perfil = "Freelancer Digital";
+let linkCurso = "freelancer.html";
+
+let descricao = `
+Compatibilidade: 91%<br><br>
+
+✓ Baixo investimento inicial<br>
+✓ Possibilidade de primeiros ganhos rápidos<br>
+✓ Alta demanda no mercado<br><br>
+
+Desafios:<br>
+⚠ Aprender prospecção<br>
+⚠ Desenvolver disciplina diária<br><br>
+
+Trilha recomendada:<br>
+1. Marketing Digital<br>
+2. Captação de Clientes<br>
+3. Vendas<br>
+4. Freelancer<br>
+5. Escala
+`;
+
+if(respostas.includes("Criar marca pessoal")){
+
+perfil = "Criador de Conteúdo";
+linkCurso = "conteudo.html";
+
+descricao = `
+Compatibilidade: 89%<br><br>
+
+✓ Potencial de longo prazo<br>
+✓ Construção de audiência<br>
+✓ Monetização escalável<br><br>
+
+Desafios:<br>
+⚠ Consistência<br>
+⚠ Crescimento gradual<br><br>
+
+Trilha recomendada:<br>
+1. Marketing Digital<br>
+2. Conteúdo<br>
+3. Crescimento<br>
+4. Monetização<br>
+5. Escala
+`;
+
+}
+
+document.getElementById("perfil").innerHTML = perfil;
+
+document.getElementById("descricao").innerHTML =
+descricao +
+`
+<br><br>
+
+<a href="${linkCurso}"
+style="
+background:#FFD700;
+color:black;
+padding:14px 25px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+display:inline-block;
+">
+🚀 Acessar Minha Trilha
+</a>
+`;
+
+}
 
 }
 
